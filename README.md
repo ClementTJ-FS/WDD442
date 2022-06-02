@@ -10,3 +10,5 @@ This is a bit of a review week. Topics include CRUD operations, express routing,
 - - Completed 'Routing in Express' assignment.
 - - Started 'Building a RESTful API' assignment. 
 - - Added files for additional models/controlers.
+- Created default questions/choices models.
+- Finished questions/choices controllers.

@@ -18,7 +18,6 @@ router.get("/:id", (req, res) => {
   const id = req.params.id;
   const quiz = quizzes.find((q) => q.id == id);
   res.json(quiz);
-  res.send("Quizzes#Show");
 });
 router.post("/:id", (req, res) => {
   const id = Number(req.params.id)
