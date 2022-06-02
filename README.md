@@ -7,8 +7,8 @@ This is a bit of a review week. Topics include CRUD operations, express routing,
 
 ### Changes - 
 - Initial commit includes:
-- - Completed 'Routing in Express' assignment.
-- - Started 'Building a RESTful API' assignment. 
-- - Added files for additional models/controlers.
+ - Completed 'Routing in Express' assignment.
+ - Started 'Building a RESTful API' assignment. 
+ - Added files for additional models/controlers.
 - Created default questions/choices models.
 - Finished questions/choices controllers.
