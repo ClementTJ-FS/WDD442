@@ -12,3 +12,4 @@ This is a bit of a review week. Topics include CRUD operations, express routing,
   - Added files for additional models/controlers.
 - Created default questions/choices models.
 - Finished questions/choices controllers.
+- Minor var name changes in questions/choices.
