@@ -1,37 +1,44 @@
 const express = require("express"),
-  router = express.Router();
-let questions = require("../models/questions");
+  router = express.Router(),
+  { Question } = require("../models");
 
-router.get("/", (req, res) => {
-  res.json(questions);
-});
-router.post("/", (req, res) => {
-  const {id,question} = req.body
-  questions.push({
-    id: Number(id),
-    question
-  })
-  res.json(questions);
-});
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  const question = questions.find((q) => q.id == id);
-  res.json(question);
-});
-router.post("/:id", (req, res) => {
-  const id = Number(req.params.id)
-  questions.map(q=>{
-    if (id === q.id) {
-      q.question = req.body.question
-    } 
-    return q
-  })
-  res.json(questions);
-});
-router.delete("/:id", (req, res) => {
-  const id = Number(req.params.id)
-  questions = questions.filter(q => q.id !== id)
-  res.json(questions);
-});
+  // GET
+  router.get("/", async (req, res) => {
+    const questions = await Question.findAll();
+    res.json(questions);
+  });
+  
+  // CREATE
+  router.post("/", async (req, res) => {
+    const { questionText } = req.body;
+    const q = await Question.create({ questionText });
+    res.json(q);
+  });
+  
+  // READ
+  router.get("/:id", async (req, res) => {
+    const question = await Question.findByPk(req.params.id);
+    res.json(question);
+  });
+  
+  // UPDATE
+  router.post("/:id", async (req, res) => {
+    const { questionText } = req.body;
+    const id = req.params.id;
+    const q = await Question.update({ questionText }, { where: { id } });
+    res.json(q);
+  });
+  
+  //DELETE
+  router.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    const deleted = await Question.destroy({
+      where: { id },
+    });
+    // res.json({ deleted });
+    if (deleted) {
+      res.redirect("/");
+    }
+  });
 
 module.exports = router;

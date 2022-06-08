@@ -1,37 +1,45 @@
 const express = require("express"),
-  router = express.Router();
-let choices = require("../models/choices");
+  router = express.Router(),
+  { Choice } = require("../models");
 
-router.get("/", (req, res) => {
-  res.json(choices);
-});
-router.post("/", (req, res) => {
-  const {id,choice} = req.body
-  choices.push({
-    id: Number(id),
-    choice
-  })
-  res.json(choices);
-});
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  const choice = choices.find((q) => q.id == id);
-  res.json(choice);
-});
-router.post("/:id", (req, res) => {
-  const id = Number(req.params.id)
-  choices.map(q=>{
-    if (id === q.id) {
-      q.choice = req.body.choice
-    } 
-    return q
-  })
-  res.json(choices);
-});
-router.delete("/:id", (req, res) => {
-  const id = Number(req.params.id)
-  choices = choices.filter(q => q.id !== id)
-  res.json(choices);
-});
+
+  // GET
+  router.get("/", async (req, res) => {
+    const choices = await Choice.findAll();
+    res.json(choices);
+  });
+  
+  // CREATE
+  router.post("/", async (req, res) => {
+    const { choiceText } = req.body;
+    const c = await Choice.create({ choiceText });
+    res.json(c);
+  });
+  
+  // READ
+  router.get("/:id", async (req, res) => {
+    const c = await Choice.findByPk(req.params.id);
+    res.json(c);
+  });
+  
+  // UPDATE
+  router.post("/:id", async (req, res) => {
+    const { choiceText } = req.body;
+    const id = req.params.id;
+    const c = await Choice.update({ choiceText }, { where: { id } });
+    res.json(c);
+  });
+  
+  //DELETE
+  router.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    const deleted = await Choice.destroy({
+      where: { id },
+    });
+    // res.json({ deleted });
+    if (deleted) {
+      res.redirect("/choices");
+    }
+  });
 
 module.exports = router;
