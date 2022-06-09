@@ -20,4 +20,7 @@ This week is about Database Abstraction Layers (DBALs), Object Realtional Mappin
 - Generated models for quiz, question, choice.
 - Removed old json models.
 - Updated controllers to interface with sequelize.
-- Migrated new column names.
+- Added column names to migration.
+- Added simple associations.
+- Added weight column to quizzes.
+- Updated controllers with new column names.

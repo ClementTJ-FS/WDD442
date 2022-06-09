@@ -36,9 +36,6 @@ router.delete("/:id", async (req, res) => {
     where: { id },
   });
   res.json({ deleted });
-  if (deleted) {
-    res.redirect("/");
-  }
 });
 
 module.exports = router;

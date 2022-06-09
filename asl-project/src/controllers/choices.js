@@ -1,11 +1,13 @@
 const express = require("express"),
   router = express.Router(),
-  { Choice } = require("../models");
+  { Choice, Question } = require("../models");
 
 
   // GET
   router.get("/", async (req, res) => {
-    const choices = await Choice.findAll();
+    const choices = await Choice.findAll({
+      include: Question
+    });
     res.json(choices);
   });
   
