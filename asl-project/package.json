@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "start": "nodemon -e js,eta --watch src index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eta": "^1.12.3",
     "express": "^4.18.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.20.1"

@@ -1,0 +1,12 @@
+<% layout('./layouts/_default') %>
+
+<div>
+  <h1><%= it.quiz.name %></h1>
+  <p><strong>ID: </strong><%= it.quiz.id%></p>
+  <p><strong>Created At: </strong><%= it.quiz.createdAt %></p>
+  <p><strong>Updated Last: </strong><%= it.quiz.updatedAt %></p>
+  <p>
+    <a href="/quizzes/<%= it.quiz.id %>/delete">Delete</a>
+  </p>
+</div>
+<a href="/quizzes/">Back to Quizzes.</a>

@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Quiz.init(
     {
       name: DataTypes.STRING,
+      weight: DataTypes.FLOAT,
     },
     {
       sequelize,

@@ -1,0 +1,15 @@
+<% if(it.quiz){ %>
+  <form action="/quizzes/<%= it.quiz.id %>" method="post">
+<%}else{%>
+  <form action="/quizzes/" method="post">
+<%}%>
+  <div>
+    <label for="name">Name: </label>
+    <% if(it.quiz){%>
+      <input id="name" type="text" name="name" value="<%=it.quiz.name_%> "/>
+    <%}else{%> 
+    <input id="name" type="text" name="name" />
+    <%}%> 
+  </div>
+  <input type="submit" value="Save Quiz" />
+</form>

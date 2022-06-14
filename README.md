@@ -24,3 +24,8 @@ This week is about Database Abstraction Layers (DBALs), Object Realtional Mappin
 - Added simple associations.
 - Added weight column to quizzes.
 - Updated controllers with new column names.
+- Code syntax changes.
+- Added Eta templating engine. 
+- Initial views setup.
+- Added quizzes view.
+- Finished quizzes CRUD functionality in the view.
