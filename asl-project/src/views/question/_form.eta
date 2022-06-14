@@ -1,0 +1,15 @@
+<% if(it.question){ %>
+  <form action="/questions/<%= it.question.id %>" method="post">
+<%}else{%>
+  <form action="/questions/" method="post">
+<%}%>
+  <div>
+    <label for="questionText">Question: </label>
+    <% if(it.question){%>
+      <input id="questionText" type="text" name="questionText" value="<%=it.question.questionText_%>" />
+    <%}else{%> 
+    <input id="questionText" type="text" name="questionText" />
+    <%}%> 
+  </div>
+  <input type="submit" value="Save Question" />
+</form>

@@ -8,6 +8,9 @@ This is a bit of a review week. Topics include CRUD operations, express routing,
 ## Week 2 - 
 This week is about Database Abstraction Layers (DBALs), Object Realtional Mapping (ORM), and Templating Engines.
 
+## Week 3 - 
+For this week, we implement a templating engine into the project, and also learn about O Auth.
+
 ### Changes - 
 - Initial commit includes:
   - Completed 'Routing in Express' assignment.
@@ -29,3 +32,6 @@ This week is about Database Abstraction Layers (DBALs), Object Realtional Mappin
 - Initial views setup.
 - Added quizzes view.
 - Finished quizzes CRUD functionality in the view.
+- Added json response support to quizzes.
+- Created questions views/CRUD functionality/JSON support.
+- Created choices views/CRUD functionality/JSON support.

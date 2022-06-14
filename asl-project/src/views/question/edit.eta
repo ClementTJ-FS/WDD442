@@ -1,0 +1,3 @@
+<% layout('./layouts/_default') %>
+<h1><%= it.title %></h1>
+<%~ includeFile('./question/_form', {question: it.question}) %>

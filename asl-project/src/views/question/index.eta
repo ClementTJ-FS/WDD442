@@ -1,0 +1,13 @@
+<% layout('./layouts/_default') %>
+<h1><%= it.title %></h1>
+<ul>
+  <% it.questions.forEach(q => { %>
+    <li>
+      <%= q.questionText %> - 
+      <a href="/questions/<%= q.id %>/edit">Edit</a>
+      |
+      <a href="/questions/<%= q.id %>/delete">Delete</a>
+    </li>
+  <% }) %>
+</ul>
+<p><a href="/questions/new">Create new Quiz.</a></p>

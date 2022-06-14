@@ -5,7 +5,11 @@ const express = require("express"),
 // GET
 router.get("/", async (req, res) => {
   const quizzes = await Quiz.findAll();
-  res.render("quiz/index", { title: "Quizzes", quizzes });
+  if (req.headers.accept.indexOf("/json") > -1) {
+    res.json(quizzes);
+  } else {
+    res.render("quiz/index", { title: "Quizzes", quizzes });
+  }
 });
 
 // CREATE path
@@ -17,13 +21,21 @@ router.get("/new", (req, res) => {
 router.post("/", async (req, res) => {
   const { name, weight } = req.body,
     quiz = await Quiz.create({ name, weight });
-  res.redirect("/quizzes/" + quiz.id);
+  if (req.headers.accept.indexOf("/json") > -1) {
+    res.json(quiz);
+  } else {
+    res.redirect("/quizzes/" + quiz.id);
+  }
 });
 
 // READ
 router.get("/:id", async (req, res) => {
   const quiz = await Quiz.findByPk(req.params.id);
-  res.render("quiz/show", { quiz });
+  if (req.headers.accept.indexOf("/json") > -1) {
+    res.json(quiz);
+  } else {
+    res.render("quiz/show", { quiz });
+  }
 });
 
 // UPDATE path
@@ -37,7 +49,11 @@ router.post("/:id", async (req, res) => {
   const { name, weight } = req.body,
     id = req.params.id,
     quiz = await Quiz.update({ name, weight }, { where: { id } });
-  res.redirect("/quizzes/" + id);
+  if (req.headers.accept.indexOf("/json") > -1) {
+    res.json(quiz);
+  } else {
+    res.redirect("/quizzes/" + id);
+  }
 });
 
 // DELETE
@@ -46,7 +62,11 @@ router.get("/:id/delete", async (req, res) => {
   await Quiz.destroy({
     where: { id },
   });
-  res.redirect("/quizzes");
+  if (req.headers.accept.indexOf("/json") > -1) {
+    res.json({ Success: true });
+  } else {
+    res.redirect("/quizzes");
+  }
 });
 
 module.exports = router;

@@ -1,0 +1,13 @@
+<% layout('./layouts/_default') %>
+<h1><%= it.title %></h1>
+<ul>
+  <% it.choices.forEach(q => { %>
+    <li>
+      <%= q.choiceText %> - 
+      <a href="/choices/<%= q.id %>/edit">Edit</a>
+      |
+      <a href="/choices/<%= q.id %>/delete">Delete</a>
+    </li>
+  <% }) %>
+</ul>
+<p><a href="/choices/new">Create new Choice.</a></p>
