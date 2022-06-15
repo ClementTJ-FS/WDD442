@@ -1,9 +1,10 @@
 const express = require("express"),
   router = express.Router(),
-  { Question, Quiz } = require("../models");
+  { Question, Quiz } = require("../models"),
+  { isAuthed } = require("../middlewares/auth");
 
 // GET
-router.get("/", async (req, res) => {
+router.get("/", isAuthed, async (req, res) => {
   const questions = await Question.findAll({
     include: Quiz,
   });
@@ -15,12 +16,12 @@ router.get("/", async (req, res) => {
 });
 
 // CREATE path
-router.get("/new", (req, res) => {
+router.get("/new", isAuthed, (req, res) => {
   res.render("question/create", { title: "Create Question" });
 });
 
 // CREATE
-router.post("/", async (req, res) => {
+router.post("/", isAuthed, async (req, res) => {
   const { questionText } = req.body,
     q = await Question.create({ questionText });
   if (req.headers.accept.indexOf("/json") > -1) {
@@ -31,7 +32,7 @@ router.post("/", async (req, res) => {
 });
 
 // READ
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAuthed, async (req, res) => {
   const question = await Question.findByPk(req.params.id);
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(question);
@@ -41,7 +42,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // UPDATE path
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isAuthed, async (req, res) => {
   const question = await Question.findByPk(req.params.id);
   res.render("question/edit", {
     question: question,
@@ -50,7 +51,7 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 // UPDATE
-router.post("/:id", async (req, res) => {
+router.post("/:id", isAuthed, async (req, res) => {
   const { questionText } = req.body,
     id = req.params.id,
     q = await Question.update({ questionText }, { where: { id } });
@@ -62,7 +63,7 @@ router.post("/:id", async (req, res) => {
 });
 
 //DELETE
-router.get("/:id/delete", async (req, res) => {
+router.get("/:id/delete", isAuthed, async (req, res) => {
   const id = req.params.id;
   await Question.destroy({
     where: { id },

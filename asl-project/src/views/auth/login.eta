@@ -1,0 +1,5 @@
+<% layout('./layouts/_default') %>
+<a
+  href="https://github.com/login/oauth/authorize?client_id=e3ebfea3a5e32f5169e1"
+  >Login with GitHub.</a
+>

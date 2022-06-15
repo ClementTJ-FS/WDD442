@@ -1,9 +1,10 @@
 const express = require("express"),
   router = express.Router(),
-  { Choice, Question } = require("../models");
+  { Choice, Question } = require("../models"),
+  { isAuthed } = require("../middlewares/auth");
 
 // GET
-router.get("/", async (req, res) => {
+router.get("/", isAuthed, async (req, res) => {
   const choices = await Choice.findAll();
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(choices);
@@ -13,12 +14,12 @@ router.get("/", async (req, res) => {
 });
 
 // CREATE path
-router.get("/new", (req, res) => {
+router.get("/new", isAuthed, (req, res) => {
   res.render("choice/create", { title: "Create Choice" });
 });
 
 // CREATE
-router.post("/", async (req, res) => {
+router.post("/", isAuthed, async (req, res) => {
   const { choiceText } = req.body,
     c = await Choice.create({ choiceText });
   if (req.headers.accept.indexOf("/json") > -1) {
@@ -29,7 +30,7 @@ router.post("/", async (req, res) => {
 });
 
 // READ
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAuthed, async (req, res) => {
   const c = await Choice.findByPk(req.params.id);
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(c);
@@ -39,7 +40,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // UPDATE path
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isAuthed, async (req, res) => {
   const choice = await Choice.findByPk(req.params.id);
   res.render("choice/edit", {
     choice: choice,
@@ -48,7 +49,7 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 // UPDATE
-router.post("/:id", async (req, res) => {
+router.post("/:id", isAuthed, async (req, res) => {
   const { choiceText } = req.body,
     id = req.params.id,
     c = await Choice.update({ choiceText }, { where: { id } });
@@ -60,7 +61,7 @@ router.post("/:id", async (req, res) => {
 });
 
 //DELETE
-router.get("/:id/delete", async (req, res) => {
+router.get("/:id/delete", isAuthed, async (req, res) => {
   const id = req.params.id;
   await Choice.destroy({
     where: { id },

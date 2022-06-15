@@ -3,8 +3,20 @@ const express = require("express"),
   quizzesCtrl = require("./src/controllers/quizzes"),
   questionsCtrl = require("./src/controllers/questions"),
   choicesCtrl = require("./src/controllers/choices"),
-  eta = require("eta");
+  authCtrl = require("./src/controllers/auth"),
+  eta = require("eta"),
+  session = require("express-session");
 
+app.use(
+  session({
+    saveUninitialized: false,
+    secret: "keyboard cat",
+    resave: false,
+    cookie: {
+      maxAge: 60000,
+    },
+  })
+);
 // Built in body-parser
 app.use(express.urlencoded({ extended: true }));
 
@@ -14,12 +26,14 @@ app.set("view engine", "eta");
 app.set("views", __dirname + "/src/views");
 
 // GET / HTTP/1.1
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   res.render("home/home", { title: "Home" });
 });
 
+// controllers
 app.use("/quizzes", quizzesCtrl);
 app.use("/questions", questionsCtrl);
 app.use("/choices", choicesCtrl);
+app.use("/auth", authCtrl);
 
 app.listen(3000);

@@ -35,3 +35,5 @@ For this week, we implement a templating engine into the project, and also learn
 - Added json response support to quizzes.
 - Created questions views/CRUD functionality/JSON support.
 - Created choices views/CRUD functionality/JSON support.
+- Added GitHub Oauth view/controller.
+- Added authentication to all api routes.
