@@ -1,6 +1,7 @@
 const express = require("express"),
   router = express.Router(),
-  request = require("request");
+  request = require("request"),
+  { LoginToken } = require("../models/index");
 
 router.get("/login", (req, res) => {
   res.render("auth/login");
@@ -23,6 +24,7 @@ router.get("/callback", async (req, res) => {
     async (err, response, body) => {
       const { access_token } = JSON.parse(body);
       req.session.access_token = access_token;
+      const loginToken = await LoginToken.create({ token: access_token });
       res.redirect("/");
     }
   );

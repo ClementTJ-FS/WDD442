@@ -1,10 +1,10 @@
 const express = require("express"),
   router = express.Router(),
-  { Quiz } = require("../models"),
-  { isAuthed } = require("../middlewares/auth");
+  { Quiz } = require("../models");
+  
 
 // GET
-router.get("/", isAuthed, async (req, res) => {
+router.get("/", async (req, res) => {
   const quizzes = await Quiz.findAll();
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(quizzes);
@@ -14,12 +14,12 @@ router.get("/", isAuthed, async (req, res) => {
 });
 
 // CREATE path
-router.get("/new", isAuthed, (req, res) => {
+router.get("/new", (req, res) => {
   res.render("quiz/create", { title: "Create Quiz" });
 });
 
 // CREATE
-router.post("/", isAuthed, async (req, res) => {
+router.post("/", async (req, res) => {
   const { name, weight } = req.body,
     quiz = await Quiz.create({ name, weight });
   if (req.headers.accept.indexOf("/json") > -1) {
@@ -30,7 +30,7 @@ router.post("/", isAuthed, async (req, res) => {
 });
 
 // READ
-router.get("/:id", isAuthed, async (req, res) => {
+router.get("/:id", async (req, res) => {
   const quiz = await Quiz.findByPk(req.params.id);
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(quiz);
@@ -40,13 +40,13 @@ router.get("/:id", isAuthed, async (req, res) => {
 });
 
 // UPDATE path
-router.get("/:id/edit", isAuthed, async (req, res) => {
+router.get("/:id/edit", async (req, res) => {
   const quiz = await Quiz.findByPk(req.params.id);
   res.render("quiz/edit", { quiz: quiz, title: "Edit Quiz: " + quiz.id });
 });
 
 // UPDATE
-router.post("/:id", isAuthed, async (req, res) => {
+router.post("/:id", async (req, res) => {
   const { name, weight } = req.body,
     id = req.params.id,
     quiz = await Quiz.update({ name, weight }, { where: { id } });
@@ -58,7 +58,7 @@ router.post("/:id", isAuthed, async (req, res) => {
 });
 
 // DELETE
-router.get("/:id/delete", isAuthed, async (req, res) => {
+router.get("/:id/delete", async (req, res) => {
   const id = req.params.id;
   await Quiz.destroy({
     where: { id },

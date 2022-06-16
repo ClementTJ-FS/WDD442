@@ -5,7 +5,8 @@ const express = require("express"),
   choicesCtrl = require("./src/controllers/choices"),
   authCtrl = require("./src/controllers/auth"),
   eta = require("eta"),
-  session = require("express-session");
+  session = require("express-session"),
+  { isAuthed } = require("./src/middlewares/auth");
 
 app.use(
   session({
@@ -31,9 +32,9 @@ app.get("/", (req, res, next) => {
 });
 
 // controllers
-app.use("/quizzes", quizzesCtrl);
-app.use("/questions", questionsCtrl);
-app.use("/choices", choicesCtrl);
+app.use("/quizzes", isAuthed, quizzesCtrl);
+app.use("/questions", isAuthed, questionsCtrl);
+app.use("/choices", isAuthed, choicesCtrl);
 app.use("/auth", authCtrl);
 
 app.listen(3000);

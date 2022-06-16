@@ -1,10 +1,9 @@
 const express = require("express"),
   router = express.Router(),
-  { Choice, Question } = require("../models"),
-  { isAuthed } = require("../middlewares/auth");
+  { Choice, Question } = require("../models");
 
 // GET
-router.get("/", isAuthed, async (req, res) => {
+router.get("/", async (req, res) => {
   const choices = await Choice.findAll();
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(choices);
@@ -14,12 +13,12 @@ router.get("/", isAuthed, async (req, res) => {
 });
 
 // CREATE path
-router.get("/new", isAuthed, (req, res) => {
+router.get("/new", (req, res) => {
   res.render("choice/create", { title: "Create Choice" });
 });
 
 // CREATE
-router.post("/", isAuthed, async (req, res) => {
+router.post("/", async (req, res) => {
   const { choiceText } = req.body,
     c = await Choice.create({ choiceText });
   if (req.headers.accept.indexOf("/json") > -1) {
@@ -30,7 +29,7 @@ router.post("/", isAuthed, async (req, res) => {
 });
 
 // READ
-router.get("/:id", isAuthed, async (req, res) => {
+router.get("/:id", async (req, res) => {
   const c = await Choice.findByPk(req.params.id);
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(c);
@@ -40,7 +39,7 @@ router.get("/:id", isAuthed, async (req, res) => {
 });
 
 // UPDATE path
-router.get("/:id/edit", isAuthed, async (req, res) => {
+router.get("/:id/edit", async (req, res) => {
   const choice = await Choice.findByPk(req.params.id);
   res.render("choice/edit", {
     choice: choice,
@@ -49,7 +48,7 @@ router.get("/:id/edit", isAuthed, async (req, res) => {
 });
 
 // UPDATE
-router.post("/:id", isAuthed, async (req, res) => {
+router.post("/:id", async (req, res) => {
   const { choiceText } = req.body,
     id = req.params.id,
     c = await Choice.update({ choiceText }, { where: { id } });
@@ -61,7 +60,7 @@ router.post("/:id", isAuthed, async (req, res) => {
 });
 
 //DELETE
-router.get("/:id/delete", isAuthed, async (req, res) => {
+router.get("/:id/delete", async (req, res) => {
   const id = req.params.id;
   await Choice.destroy({
     where: { id },

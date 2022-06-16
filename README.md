@@ -37,3 +37,5 @@ For this week, we implement a templating engine into the project, and also learn
 - Created choices views/CRUD functionality/JSON support.
 - Added GitHub Oauth view/controller.
 - Added authentication to all api routes.
+- Added login token table to db.
+- Login Tokens now get added to db on login.
