@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -e js,eta --watch src --watch index.js"
+    "start": "concurrently \"nodemon -e js,eta --watch src --watch index.js\" \"cd reactapp && npm start\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "eta": "^1.12.3",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
@@ -19,6 +20,7 @@
     "sequelize": "^6.20.1"
   },
   "devDependencies": {
+    "concurrently": "^7.2.2",
     "nodemon": "^2.0.16",
     "sequelize-cli": "^6.4.1"
   }

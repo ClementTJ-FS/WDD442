@@ -6,6 +6,7 @@ const express = require("express"),
   authCtrl = require("./src/controllers/auth"),
   eta = require("eta"),
   session = require("express-session"),
+  cors = require("cors"),
   { isAuthed } = require("./src/middlewares/auth");
 
 app.use(
@@ -26,6 +27,16 @@ app.engine("eta", eta.renderFile);
 app.set("view engine", "eta");
 app.set("views", __dirname + "/src/views");
 
+//cors
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204,
+  "credentials": true,
+  "allowCrossDomain": true
+}))
+
 // GET / HTTP/1.1
 app.get("/", (req, res, next) => {
   res.render("home/home", { title: "Home" });
@@ -36,5 +47,7 @@ app.use("/quizzes", isAuthed, quizzesCtrl);
 app.use("/questions", isAuthed, questionsCtrl);
 app.use("/choices", isAuthed, choicesCtrl);
 app.use("/auth", authCtrl);
+
+
 
 app.listen(3000);

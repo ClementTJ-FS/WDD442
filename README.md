@@ -38,4 +38,10 @@ For this week, we implement a templating engine into the project, and also learn
 - Added GitHub Oauth view/controller.
 - Added authentication to all api routes.
 - Added login token table to db.
-- Login Tokens now get added to db on login.
+- Login Tokens now added to db on login.
+- Added react app to the project.
+- Added react boilerplate components for quizzes, questions, and home, login.
+- Added cors to api.
+- React now gets token from url and checks against db.
+- Finished login component functionality.
+
