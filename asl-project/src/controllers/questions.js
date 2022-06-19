@@ -32,7 +32,9 @@ router.post("/", async (req, res) => {
 
 // READ
 router.get("/:id", async (req, res) => {
-  const question = await Question.findByPk(req.params.id);
+  const question = await Question.findByPk(req.params.id, {
+    include: Quiz,
+  });
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(question);
   } else {

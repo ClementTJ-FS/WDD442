@@ -44,4 +44,14 @@ For this week, we implement a templating engine into the project, and also learn
 - Added cors to api.
 - React now gets token from url and checks against db.
 - Finished login component functionality.
+- Home now displays quizzes when user is logged in.
+- Added seeders to db for quizzes, questions, and choices.
+- Quizzes now display questions and choices.
+- Created logout component and functionality. 
+  - Removes token from local storage and db.
+  - Redirects to login.
+- Finished most of the functionality for the react app.
+
+
+
 

@@ -1,12 +1,13 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import queryString from "query-string";
 import Nav from "./Nav";
 import Home from "./Home";
 import Login from "./Login";
 import Quiz from "./Quiz";
+import Logout from "./Logout";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -14,7 +15,7 @@ const App = () => {
   useEffect(() => {
     // get token from url.
     const params = queryString.parse(window.location.search.replace(/^\?/, ""));
-    //save token.
+    //save token to local storage.
     localStorage.token = params.token;
     //check if token is in db.
     async function checkToken() {
@@ -23,6 +24,7 @@ const App = () => {
           token: localStorage.token,
         },
       });
+      //save token to state.
       setToken(response.data.token);
     }
     checkToken();
@@ -30,18 +32,18 @@ const App = () => {
 
   if (!token) {
     return <Login />;
-  }
-  return (
-    <Router>
+  } else {
+    return (
       <div className="App">
         <Nav isLoggedin={token ? true : false} />
         <Routes>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/quizzes/:id" element={<Quiz />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/quiz/:id" element={<Quiz />} />
+          <Route exact path="/logout" element={<Logout />} />
         </Routes>
       </div>
-    </Router>
-  );
+    );
+  }
 };
 
 export default App;

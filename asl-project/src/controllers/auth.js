@@ -49,6 +49,13 @@ router.get("/token", async (req, res) => {
 
 //logout
 router.get("/logout", (req, res) => {
+  console.log(req.headers.token);
+  //delete token from db
+  LoginToken.destroy({
+    where: {
+      token: req.headers.token,
+    },
+  });
   req.session.destroy();
   res.redirect("http://localhost:4000");
 });

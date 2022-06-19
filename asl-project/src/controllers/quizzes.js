@@ -1,11 +1,12 @@
 const express = require("express"),
   router = express.Router(),
-  { Quiz } = require("../models");
-  
+  { Quiz, Question, Choice } = require("../models");
 
 // GET
 router.get("/", async (req, res) => {
-  const quizzes = await Quiz.findAll();
+  const quizzes = await Quiz.findAll({
+    include: [{ model: Question, include: [Choice] }],
+  });
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(quizzes);
   } else {
@@ -31,7 +32,9 @@ router.post("/", async (req, res) => {
 
 // READ
 router.get("/:id", async (req, res) => {
-  const quiz = await Quiz.findByPk(req.params.id);
+  const quiz = await Quiz.findByPk(req.params.id, {
+    include: [{ model: Question, include: [Choice] }],
+  });
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(quiz);
   } else {

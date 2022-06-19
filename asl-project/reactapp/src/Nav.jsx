@@ -7,11 +7,9 @@ const Nav = (props) => {
       <li>
         <Link to="/">Home</Link>
       </li>
-      {props.isLoggedIn && (
-        <li>
-          <Link to="/logout">Logout</Link>
-        </li>
-      )}
+      <li>
+        {props.isLoggedin && <Link to="/logout">Logout</Link>}
+      </li>
     </ul>
   );
 };
