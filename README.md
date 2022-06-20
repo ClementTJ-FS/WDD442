@@ -11,6 +11,9 @@ This week is about Database Abstraction Layers (DBALs), Object Realtional Mappin
 ## Week 3 - 
 For this week, we implement a templating engine into the project, and also learn about O Auth.
 
+## Week 4 -
+This week is about the final project. We integrate react into the project and style a front end application that uses the API to display all of the quizzes.
+
 ### Changes - 
 - Initial commit includes:
   - Completed 'Routing in Express' assignment.
@@ -51,6 +54,7 @@ For this week, we implement a templating engine into the project, and also learn
   - Removes token from local storage and db.
   - Redirects to login.
 - Finished most of the functionality for the react app.
+- First style pass for login component.
 
 
 
