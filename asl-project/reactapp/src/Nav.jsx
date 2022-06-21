@@ -1,44 +1,75 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Style from "style-it";
+import { AiOutlineHome, AiOutlineLogout } from "react-icons/ai";
+import styled from "styled-components";
 
+//styled-components
+const NavBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: 3rem;
+  background-color: #181c20;
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+`;
+const NavList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10%;
+  height: 100%;
+  padding: 0;
+`;
+const NavListItem = styled.li`
+  height: 100%;
+`;
+const NavItem = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  :hover {
+    background-color: #2ea043;
+    box-shadow: 0.5rem 0.5rem 0.2rem rgba(0, 0, 0, 0.15);
+  }
+`;
+const NavItemIconHome = styled(AiOutlineHome)`
+  margin-right: 0.5rem;
+  color: #fff;
+`;
+const NavItemIconLogout = styled(AiOutlineLogout)`
+  margin-right: 0.5rem;
+  color: #fff;
+`;
 const Nav = (props) => {
-  return Style.it(
-    `
-      #nav-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        width: 100%;
-        height: 3rem;
-        background-color: #fff;
-        border-bottom: 1px solid #ccc;
-        box-shadow: 0 0.1rem .2rem rgba(0, 0, 0, 0.15);
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1;
-      },
-      #nav-list {
-        list-style: none;
-        display: flex; 
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        width: 10%;
-      },
-    `,
-    <div id="nav-bar">
-      <ul id="nav-list">
-        <li class="nav-item">
-          <Link to="/">Home</Link>
-        </li>
-        <li class="nav-item">
-          {props.isLoggedin && <Link to="/logout">Logout</Link>}
-        </li>
-      </ul>
-    </div>
+  return (
+    <NavBar>
+      <NavList>
+        <NavListItem>
+          <NavItem to="/">{<NavItemIconHome />} Home</NavItem>
+        </NavListItem>
+        <NavListItem>
+          {props.isLoggedin && (
+            <NavItem to="/logout">{<NavItemIconLogout />} Logout</NavItem>
+          )}
+        </NavListItem>
+      </NavList>
+    </NavBar>
   );
 };
 

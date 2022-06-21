@@ -1,24 +1,25 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-const Logout = () => {
+const Logout = ({ setToken }) => {
   useEffect(() => {
     // send token to server to delete it
-    console.log(localStorage.token);
     async function clearToken() {
       await axios.get("http://localhost:3000/auth/logout", {
         headers: {
           token: localStorage.token,
         },
       });
+      // clear localstorage
+      localStorage.clear();
+      setToken("");
     }
     clearToken();
-    // Clear the token from localStorage.
-    localStorage.removeItem("token");
+
     // reload the page to clear the token from the URL
-    window.location.reload();
-  }, []);
-  return null
+    window.location.href = "http://localhost:4000";
+  }, [setToken]);
+  return null;
 };
 
 export default Logout;

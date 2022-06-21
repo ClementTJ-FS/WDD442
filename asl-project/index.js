@@ -17,6 +17,7 @@ app.use(
     cookie: {
       maxAge: 60000,
     },
+    unset: "destroy",
   })
 );
 // Built in body-parser

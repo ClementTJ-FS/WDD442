@@ -1,6 +1,6 @@
 const express = require("express"),
   router = express.Router(),
-  { Choice, Question } = require("../models");
+  { Choice } = require("../models");
 
 // GET
 router.get("/", async (req, res) => {

@@ -55,6 +55,11 @@ This week is about the final project. We integrate react into the project and st
   - Redirects to login.
 - Finished most of the functionality for the react app.
 - First style pass for login component.
+- Second style pass for login component. 
+- First style pass for Nav component.
+- Switched to styled-components for styling.
+- Second style pass for Nav component.
+
 
 
 

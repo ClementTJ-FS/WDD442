@@ -24,9 +24,13 @@ router.get("/callback", async (req, res) => {
       },
     },
     async (err, response, body) => {
+      // parse the body of the response for the access_token
       const { access_token } = JSON.parse(body);
+      //set the access_token in the session
       req.session.access_token = access_token;
-      const loginToken = await LoginToken.create({ token: access_token });
+      //add the access_token to the database
+      await LoginToken.create({ token: access_token });
+      //redirect to the home page
       res.redirect("http://localhost:4000?token=" + access_token);
     }
   );
@@ -34,11 +38,13 @@ router.get("/callback", async (req, res) => {
 
 //check db for token.
 router.get("/token", async (req, res) => {
+  //find the token in the db
   const token = await LoginToken.findOne({
     where: {
       token: req.headers.token,
     },
   });
+  //set the token in the session, respond with the token as a json object
   if (token) {
     req.session.access_token = req.headers.token;
     res.json(token);
@@ -48,15 +54,13 @@ router.get("/token", async (req, res) => {
 });
 
 //logout
-router.get("/logout", (req, res) => {
-  console.log(req.headers.token);
+router.get("/logout", async (req, res) => {
   //delete token from db
-  LoginToken.destroy({
+  await LoginToken.destroy({
     where: {
       token: req.headers.token,
     },
   });
-  req.session.destroy();
   res.redirect("http://localhost:4000");
 });
 

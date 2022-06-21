@@ -7,8 +7,18 @@ import Home from "./Home";
 import Login from "./Login";
 import Quiz from "./Quiz";
 import Logout from "./Logout";
-import Style from "style-it";
+import styled from "styled-components";
 
+//styled-components
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #0d0f12;
+  color: #fff;
+`;
 const App = () => {
   const [token, setToken] = useState("");
 
@@ -33,25 +43,21 @@ const App = () => {
   if (!token) {
     return <Login />;
   } else {
-    return Style.it(
-      `
-      .App {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        background-color: #f5f5f5;
-      }
-    `,
-      <div className="App">
-        <Nav isLoggedin={token ? true : false} />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/quiz/:id" element={<Quiz />} />
-          <Route exact path="/logout" element={<Logout />} />
-        </Routes>
-      </div>
+    return (
+      <>
+        <AppContainer>
+          <Nav isLoggedin={token ? true : false} />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/quiz/:id" element={<Quiz />} />
+            <Route
+              exact
+              path="/logout"
+              element={<Logout setToken={setToken} />}
+            />
+          </Routes>
+        </AppContainer>
+      </>
     );
   }
 };
