@@ -74,7 +74,7 @@ router.get("/logout", async (req, res) => {
     }
   } else {
     //clear the token from db if it exists. Redirect to the home page.
-    if (req.headers.token !== "undefined") {
+    if (typeof req.headers.token !== "undefined") {
       await LoginToken.destroy({
         where: {
           token: req.headers.token,

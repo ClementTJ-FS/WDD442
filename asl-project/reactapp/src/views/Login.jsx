@@ -25,8 +25,14 @@ const LoginBox = styled.div`
   padding: 3rem 2rem;
   background-color: #181c20;
   border-radius: 0.5rem;
+  border-left: 2px solid #388697;
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
   color: #fff;
+  &.animated {
+    animation-name: fadeOut;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
 `;
 const LoginTitle = styled.h1`
   margin: 0;

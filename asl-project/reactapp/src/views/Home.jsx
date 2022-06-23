@@ -71,6 +71,7 @@ const Home = () => {
     fetchQuizes();
   }, []);
 
+
   return (
     <Container>
       <h1>Take a Quiz!</h1>

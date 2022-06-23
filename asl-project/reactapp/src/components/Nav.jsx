@@ -12,6 +12,8 @@ const NavBar = styled.div`
   width: 100%;
   height: 3rem;
   background-color: #181c20;
+  border-radius: 0.5rem;
+  border-left: 2px solid #388697;
   box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;

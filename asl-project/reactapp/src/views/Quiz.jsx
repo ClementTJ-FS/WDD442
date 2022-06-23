@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Line from "../components/Line";
-import LinkBtn from "../components/LinkBtn";
+import Btn from "../components/Btn";
 
 //styled-components
 const Container = styled.div`
@@ -35,6 +35,7 @@ const QuizQuestions = styled.ul`
   }
   & > li {
     border-left: 2px solid #388697;
+    border-radius: 0.5rem;
     padding-left: 2rem;
     margin-bottom: 4rem;
   }
@@ -57,26 +58,20 @@ const QuizChoices = styled.ul`
       background: #2ea043;
       box-shadow: 0 0 0 2px #2ea043;
     }
-    & + label {
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      padding-bottom: .1rem;
-    }
+  }
+  & + label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding-bottom: 0.1rem;
+  }
 `;
 const SubmitBtnDiv = styled.div`
   align-self: end;
 `;
-const Error = styled.p`
-  color: red;
-  font-size: 1.2rem;
-  font-weight: bold;
-  }
-`;
 
 const Quiz = () => {
   const [quiz, setQuiz] = useState({ Questions: [] });
-  const [error, setError] = useState(false);
 
   const params = useParams();
   useEffect(() => {
@@ -92,15 +87,14 @@ const Quiz = () => {
     fetchQuiz();
   }, [params.id]);
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    //check if all radios are checked
-    const checked = document.querySelectorAll("input[type=radio]:checked");
-    if (checked.length === quiz.Questions.length) {
+    // check if the form passes validation
+    const quiz = document.querySelector("#quiz"),
+      isValid = quiz.checkValidity();
+    if (isValid) {
       //redirect to the home page
       window.location.href = "/?token=" + localStorage.token;
-    } else {
-      setError(true);
     }
   };
 
@@ -109,25 +103,18 @@ const Quiz = () => {
       <h1>{quiz.name} Quiz</h1>
       <Line />
       <p>Each question requires an answer.</p>
-      <QuizForm id="quiz">
+      <QuizForm id="quiz" onSubmit={handleSubmit}>
         <QuizQuestions>
           {quiz.Questions.map((q) => (
-            <li key={q.id} id={q.id}>
+            <li key={q.id} className="quizQuestion">
               <h2>{q.questionText}</h2>
               <p>Choose One</p>
-              {error ? <Error>Please select an answer</Error> : null}
               <QuizChoices>
                 {q.Choices.map((c) => (
                   <li key={c.id} id={c.id}>
                     <div>
-                      <label>
-                        <input
-                          type="radio"
-                          name={"question_" + q.id}
-                          required
-                        />
-                        {c.choiceText}
-                      </label>
+                      <input type="radio" name={"question_" + q.id} required />
+                      <label>{c.choiceText}</label>
                     </div>
                   </li>
                 ))}
@@ -135,12 +122,9 @@ const Quiz = () => {
             </li>
           ))}
         </QuizQuestions>
+
         <SubmitBtnDiv>
-          <LinkBtn
-            href={"/?token=" + localStorage.token}
-            label="Submit"
-            onClick={handleClick}
-          />
+          <Btn label="Submit" />
         </SubmitBtnDiv>
       </QuizForm>
     </Container>

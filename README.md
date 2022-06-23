@@ -71,6 +71,8 @@ This week is about the final project. We integrate react into the project and st
 - File structure change.
   - Created views folder.
   - Created components folder.
+- Fixed quiz submit logic.
+- Final styling maybe.
 
 
 
