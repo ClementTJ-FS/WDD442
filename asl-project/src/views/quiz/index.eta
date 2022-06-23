@@ -11,3 +11,4 @@
   <% }) %>
 </ul>
 <p><a href="/quizzes/new">Create new Quiz.</a></p>
+<p><a href="/auth/logout">Logout</a></p>

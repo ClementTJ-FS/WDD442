@@ -1,6 +1,8 @@
 import React from "react";
 import { BsGithub } from "react-icons/bs";
 import styled from "styled-components";
+import Line from "../components/Line";
+import LinkBtn from "../components/LinkBtn";
 
 //styled-components
 const Container = styled.div`
@@ -23,42 +25,25 @@ const LoginBox = styled.div`
   padding: 3rem 2rem;
   background-color: #181c20;
   border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
   color: #fff;
 `;
 const LoginTitle = styled.h1`
   margin: 0;
 `;
-const HR = styled.hr`
-  width: 66%;
-  border: 0;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.2);
-  margin: 1rem 0;
-`;
-const GhBtn = styled.a`
-  -webkit-appearance: button;
-  -moz-appearance: button;
-  appearance: button;
-  text-decoration: none;
-  background-color: #565656;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  :hover {
-    background-color: #2ea043;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  }
-`;
+
 const Login = () => {
   return (
     <Container>
       <LoginBox>
         <LoginTitle>Login</LoginTitle>
-        <HR />
-        <GhBtn href="https://github.com/login/oauth/authorize?client_id=e3ebfea3a5e32f5169e1">
-          Login with {<BsGithub />} <strong>GitHub</strong>
-        </GhBtn>
+        <Line />
+        <LinkBtn
+          href="https://github.com/login/oauth/authorize?client_id=e3ebfea3a5e32f5169e1"
+          flavorText="Login with "
+          icon={<BsGithub />}
+          label="GitHub"
+        />
       </LoginBox>
     </Container>
   );

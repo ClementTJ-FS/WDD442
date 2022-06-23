@@ -60,10 +60,10 @@ const Nav = (props) => {
   return (
     <NavBar>
       <NavList>
-        <NavListItem>
+        <NavListItem key="1">
           <NavItem to="/">{<NavItemIconHome />} Home</NavItem>
         </NavListItem>
-        <NavListItem>
+        <NavListItem key="2">
           {props.isLoggedin && (
             <NavItem to="/logout">{<NavItemIconLogout />} Logout</NavItem>
           )}

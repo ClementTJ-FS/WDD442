@@ -59,6 +59,20 @@ This week is about the final project. We integrate react into the project and st
 - First style pass for Nav component.
 - Switched to styled-components for styling.
 - Second style pass for Nav component.
+- First style pass for Home component.
+- Fixed logout logic based on referer.
+- Fixed login logic based on referer.
+- Created link-as-button component.
+- Created line component.
+- First style pass for quiz component.
+- Second style pass for quiz component.
+- First style pass for home component.
+- Tentative style completion.
+- File structure change.
+  - Created views folder.
+  - Created components folder.
+
+
 
 
 

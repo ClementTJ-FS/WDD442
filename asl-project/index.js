@@ -40,7 +40,7 @@ app.use(cors({
 
 // GET / HTTP/1.1
 app.get("/", (req, res, next) => {
-  res.render("home/home", { title: "Home" });
+  res.redirect("/quizzes");
 });
 
 // controllers
