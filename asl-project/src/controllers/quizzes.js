@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
   const quizzes = await Quiz.findAll({
     include: [{ model: Question, include: [Choice] }],
   });
+  // If the client requests JSON, return JSON
   if (req.headers.accept.indexOf("/json") > -1) {
     res.json(quizzes);
   } else {

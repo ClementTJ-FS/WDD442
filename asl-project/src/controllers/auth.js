@@ -26,12 +26,21 @@ router.get("/callback", async (req, res) => {
     async (err, response, body) => {
       // parse the body of the response for the access_token
       const { access_token } = JSON.parse(body);
-      //set the access_token in the session
-      req.session.access_token = access_token;
-      //add the access_token to the database
-      await LoginToken.create({ token: access_token });
-      //redirect to the home page
-      res.redirect("http://localhost:4000?token=" + access_token);
+
+      // seperate the routes for the api and the frontend. - API uses session, frontend adds token into db.
+      // prevents the user from logging in to both the api and the frontend at the same time.
+    
+      //if refferer is localhost:3000, redirect to / on api
+      if (req.headers.referer === "http://localhost:3000/") {
+        //set the access_token in the session
+        req.session.access_token = access_token;
+        res.redirect("/");
+      } else {
+        //add the access_token to the database
+        await LoginToken.create({ token: access_token });
+        //redirect to the frontend home page
+        res.redirect("http://localhost:4000?token=" + access_token);
+      }
     }
   );
 });
@@ -53,15 +62,27 @@ router.get("/token", async (req, res) => {
   }
 });
 
-//logout
+//logout. - if use is coming from API, remove the token from the session. - if user is coming from frontend, remove the token from the db.
 router.get("/logout", async (req, res) => {
-  //delete token from db
-  await LoginToken.destroy({
-    where: {
-      token: req.headers.token,
-    },
-  });
-  res.redirect("http://localhost:4000");
+  //redirect to the home page
+  if (req.headers.referer === "http://localhost:3000/quizzes") {
+    // clear the session if it exists. Redirect to the home page.
+    if (req.session) {
+      req.session.destroy(() => {
+        res.redirect("/");
+      });
+    }
+  } else {
+    //clear the token from db if it exists. Redirect to the home page.
+    if (req.headers.token !== "undefined") {
+      await LoginToken.destroy({
+        where: {
+          token: req.headers.token,
+        },
+      });
+    }
+    res.redirect("http://localhost:4000");
+  }
 });
 
 module.exports = router;
