@@ -24,7 +24,7 @@ const QuizListItem = styled.li`
   background-color: #181c20;
   border-left: 2px solid #388697;
   border-radius: 0.5rem;
-  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.5);
   margin: 2rem 0;
   & h2 {
     margin: 0;

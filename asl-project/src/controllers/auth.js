@@ -69,8 +69,8 @@ router.get("/logout", async (req, res) => {
     // clear the session if it exists. Redirect to the home page.
     if (req.session) {
       req.session.destroy(() => {
-        res.redirect("/");
       });
+      res.redirect("/");
     }
   } else {
     //clear the token from db if it exists. Redirect to the home page.

@@ -10,7 +10,7 @@ const Logout = ({ setToken }) => {
           token: localStorage.token,
         },
       });
-      // clear localstorage
+      // clear localstorage, set token to null
       localStorage.clear();
       setToken("");
     }

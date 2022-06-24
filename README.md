@@ -73,6 +73,8 @@ This week is about the final project. We integrate react into the project and st
   - Created components folder.
 - Fixed quiz submit logic.
 - Final styling maybe.
+- Fixed login/logout logic, again.
+- Small change to styling.
 
 
 
