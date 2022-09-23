@@ -37,11 +37,11 @@ router.get('/callback', async (req, res) => {
       //   res.redirect('/');
       // } else {
       //add the access_token to the database
-      console.log('access_token', access_token);
       await LoginToken.create({ token: access_token });
+      console.log(access_token);
       const refferer = req.headers.referer;
       //redirect to the frontend home page
-      res.redirect(`${refferer}?token=` + access_token);
+      res.redirect(`${refferer}?token=${access_token}`);
       // }
     }
   );
