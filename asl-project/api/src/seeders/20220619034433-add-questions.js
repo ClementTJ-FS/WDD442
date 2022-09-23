@@ -1,107 +1,107 @@
-"use strict";
+'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
     queryInterface.bulkInsert(
-      "Questions",
+      'Questions',
       [
         // Quiz 1
         {
-          questionText: "Question one?",
-          QuizId: 1,
+          questionText: 'Question one?',
+          quizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question two?",
-          QuizId: 1,
+          questionText: 'Question two?',
+          quizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question three?",
-          QuizId: 1,
+          questionText: 'Question three?',
+          quizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question four?",
-          QuizId: 1,
+          questionText: 'Question four?',
+          quizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         // Quiz 2
         {
-          questionText: "Question one?",
-          QuizId: 2,
+          questionText: 'Question one?',
+          quizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question two?",
-          QuizId: 2,
+          questionText: 'Question two?',
+          quizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question three?",
-          QuizId: 2,
+          questionText: 'Question three?',
+          quizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question four?",
-          QuizId: 2,
+          questionText: 'Question four?',
+          quizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         // Quiz 3
         {
-          questionText: "Question one?",
-          QuizId: 3,
+          questionText: 'Question one?',
+          quizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question two?",
-          QuizId: 3,
+          questionText: 'Question two?',
+          quizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question three?",
-          QuizId: 3,
+          questionText: 'Question three?',
+          quizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question four?",
-          QuizId: 3,
+          questionText: 'Question four?',
+          quizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         // Quiz 4
         {
-          questionText: "Question one?",
-          QuizId: 4,
+          questionText: 'Question one?',
+          quizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question two?",
-          QuizId: 4,
+          questionText: 'Question two?',
+          quizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question three?",
-          QuizId: 4,
+          questionText: 'Question three?',
+          quizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          questionText: "Question four?",
-          QuizId: 4,
+          questionText: 'Question four?',
+          quizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -111,12 +111,12 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Questions", {
+    await queryInterface.bulkDelete('Questions', {
       [Sequelize.Op.or]: [
-        { QuizId: 1 },
-        { QuizId: 2 },
-        { QuizId: 3 },
-        { QuizId: 4 },
+        { quizId: 1 },
+        { quizId: 2 },
+        { quizId: 3 },
+        { quizId: 4 },
       ],
     });
   },
