@@ -8,100 +8,100 @@ module.exports = {
         // Quiz 1
         {
           questionText: 'Question one?',
-          quizId: 1,
+          QuizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question two?',
-          quizId: 1,
+          QuizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question three?',
-          quizId: 1,
+          QuizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question four?',
-          quizId: 1,
+          QuizId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         // Quiz 2
         {
           questionText: 'Question one?',
-          quizId: 2,
+          QuizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question two?',
-          quizId: 2,
+          QuizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question three?',
-          quizId: 2,
+          QuizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question four?',
-          quizId: 2,
+          QuizId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         // Quiz 3
         {
           questionText: 'Question one?',
-          quizId: 3,
+          QuizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question two?',
-          quizId: 3,
+          QuizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question three?',
-          quizId: 3,
+          QuizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question four?',
-          quizId: 3,
+          QuizId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         // Quiz 4
         {
           questionText: 'Question one?',
-          quizId: 4,
+          QuizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question two?',
-          quizId: 4,
+          QuizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question three?',
-          quizId: 4,
+          QuizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           questionText: 'Question four?',
-          quizId: 4,
+          QuizId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -113,10 +113,10 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Questions', {
       [Sequelize.Op.or]: [
-        { quizId: 1 },
-        { quizId: 2 },
-        { quizId: 3 },
-        { quizId: 4 },
+        { QuizId: 1 },
+        { QuizId: 2 },
+        { QuizId: 3 },
+        { QuizId: 4 },
       ],
     });
   },
