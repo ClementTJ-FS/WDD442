@@ -7,25 +7,25 @@ module.exports = {
       [
         {
           name: 'Database Abstraction Layers',
-          Weight: 25,
+          weight: 25,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: 'Object Relational Mappers',
-          Weight: 25,
+          weight: 25,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: 'Using Migrations',
-          Weight: 25,
+          weight: 25,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: 'RESTful Design Patters',
-          Weight: 25,
+          weight: 25,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
