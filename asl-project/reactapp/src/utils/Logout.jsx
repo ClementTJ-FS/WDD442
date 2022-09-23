@@ -16,8 +16,8 @@ const Logout = ({ setToken }) => {
     }
     clearToken();
 
-    // reload the page to clear the token from the URL
-    window.location.href = '/';
+    // // reload the page to clear the token from the URL
+    // window.location.href = '/';
   }, [setToken]);
   return null;
 };
