@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon -e js,eta --watch src --watch index.js\" \"cd reactapp && npm start\""
+    "start": "concurrently \"nodemon -e js,eta --watch src --watch index.js\" \"cd reactapp && npm start\"",
+    "migrate": "cd src && npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
     "eta": "^1.12.3",
     "express": "^4.18.1",
     "express-session": "^1.17.3",

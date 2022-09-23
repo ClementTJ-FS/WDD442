@@ -1,26 +1,26 @@
-const express = require("express"),
+const express = require('express'),
   router = express.Router(),
-  request = require("request"),
-  { LoginToken } = require("../models/index");
+  request = require('request'),
+  { LoginToken } = require('../models/index');
 
 // GET login
-router.get("/login", (req, res) => {
-  res.render("auth/login");
+router.get('/login', (req, res) => {
+  res.render('auth/login');
 });
 
 //callback for github login
-router.get("/callback", async (req, res) => {
+router.get('/callback', async (req, res) => {
   const { code } = req.query;
   await request(
     {
-      uri: "https://github.com/login/oauth/access_token",
+      uri: 'https://github.com/login/oauth/access_token',
       qs: {
-        client_id: "e3ebfea3a5e32f5169e1",
-        client_secret: "82da6bf8f2b22f939add1d1c9418072a6c2b33b6",
+        client_id: 'e3ebfea3a5e32f5169e1',
+        client_secret: '82da6bf8f2b22f939add1d1c9418072a6c2b33b6',
         code,
       },
       headers: {
-        accept: "application/json",
+        accept: 'application/json',
       },
     },
     async (err, response, body) => {
@@ -29,24 +29,26 @@ router.get("/callback", async (req, res) => {
 
       // seperate the routes for the api and the frontend. - API uses session, frontend adds token into db.
       // prevents the user from logging in to both the api and the frontend at the same time.
-    
-      //if refferer is localhost:3000, redirect to / on api
-      if (req.headers.referer === "http://localhost:3000/") {
-        //set the access_token in the session
-        req.session.access_token = access_token;
-        res.redirect("/");
-      } else {
-        //add the access_token to the database
-        await LoginToken.create({ token: access_token });
-        //redirect to the frontend home page
-        res.redirect("http://localhost:4000?token=" + access_token);
-      }
+
+      // //if refferer is localhost:3000, redirect to / on api
+      // if (req.headers.referer === 'http://localhost:3000/') {
+      //   //set the access_token in the session
+      //   req.session.access_token = access_token;
+      //   res.redirect('/');
+      // } else {
+      //add the access_token to the database
+      console.log('access_token', access_token);
+      await LoginToken.create({ token: access_token });
+      const refferer = req.headers.referer;
+      //redirect to the frontend home page
+      res.redirect(`${refferer}?token=` + access_token);
+      // }
     }
   );
 });
 
 //check db for token.
-router.get("/token", async (req, res) => {
+router.get('/token', async (req, res) => {
   //find the token in the db
   const token = await LoginToken.findOne({
     where: {
@@ -63,25 +65,24 @@ router.get("/token", async (req, res) => {
 });
 
 //logout. - if use is coming from API, remove the token from the session. - if user is coming from frontend, remove the token from the db.
-router.get("/logout", async (req, res) => {
+router.get('/logout', async (req, res) => {
   //redirect to the home page
-  if (req.headers.referer === "http://localhost:3000/quizzes") {
+  if (req.headers.referer === 'http://localhost:3000/quizzes') {
     // clear the session if it exists. Redirect to the home page.
     if (req.session) {
-      req.session.destroy(() => {
-      });
-      res.redirect("/");
+      req.session.destroy(() => {});
+      res.redirect('/');
     }
   } else {
     //clear the token from db if it exists. Redirect to the home page.
-    if (typeof req.headers.token !== "undefined") {
+    if (typeof req.headers.token !== 'undefined') {
       await LoginToken.destroy({
         where: {
           token: req.headers.token,
         },
       });
     }
-    res.redirect("http://localhost:4000");
+    res.redirect('/');
   }
 });
 

@@ -1,0 +1,29 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-reactjs": "npm install --prefix asl-project/reactapp",
+    "install-api": "npm install --prefix asl-project/api",
+    "build-reactjs": "npm run build --prefix asl-project/reactapp",
+    "build-api": "npm run migrate --prefix asl-project/api",
+    "heroku-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\";",
+    "start": "npm start --prefix api",
+    "dev": "concurrently \"npm:build-*\" && heroku local"
+  },
+  "author": "TJ Clement",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.3.0"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  },
+  "dependencies": {
+    "sequelize": "^6.21.3",
+    "sequelize-cli": "^6.4.1"
+  }
+}

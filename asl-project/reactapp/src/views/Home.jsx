@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import styled from "styled-components";
-import Line from "../components/Line";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import styled from 'styled-components';
+import Line from '../components/Line';
 
 const Container = styled.div`
   display: flex;
@@ -60,17 +60,16 @@ const Home = () => {
   const [quizzes, setQuizzes] = useState([]);
   useEffect(() => {
     async function fetchQuizes() {
-      const response = await axios("http://localhost:3000/quizzes", {
+      const response = await axios('/quizzes', {
         headers: {
           token: localStorage.token,
-          accept: "application/json",
+          accept: 'application/json',
         },
       });
       setQuizzes(response.data);
     }
     fetchQuizes();
   }, []);
-
 
   return (
     <Container>
@@ -80,7 +79,7 @@ const Home = () => {
       <QuizList>
         {quizzes.map((q) => (
           <QuizListItem key={q.id}>
-            <Link to={"/quiz/" + q.id}>
+            <Link to={'/quiz/' + q.id}>
               <Q>
                 <h2>{q.name}</h2>
                 <QuizDetails>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import Line from "../components/Line";
-import Btn from "../components/Btn";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import Line from '../components/Line';
+import Btn from '../components/Btn';
 
 //styled-components
 const Container = styled.div`
@@ -44,7 +44,7 @@ const QuizChoices = styled.ul`
   & li {
     margin-bottom: 0.5rem;
   }
-  & input[type="radio"] {
+  & input[type='radio'] {
     height: 1.2rem;
     width: 1.2rem;
     margin-right: 1rem;
@@ -77,7 +77,7 @@ const Quiz = () => {
   useEffect(() => {
     async function fetchQuiz() {
       // get the quiz from the server
-      const q = await axios(`http://localhost:3000/quizzes/${params.id}`, {
+      const q = await axios(`/quizzes/${params.id}`, {
         headers: {
           token: localStorage.token,
         },
@@ -90,11 +90,11 @@ const Quiz = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // check if the form passes validation
-    const quiz = document.querySelector("#quiz"),
+    const quiz = document.querySelector('#quiz'),
       isValid = quiz.checkValidity();
     if (isValid) {
       //redirect to the home page
-      window.location.href = "/?token=" + localStorage.token;
+      window.location.href = '/?token=' + localStorage.token;
     }
   };
 
@@ -103,17 +103,17 @@ const Quiz = () => {
       <h1>{quiz.name} Quiz</h1>
       <Line />
       <p>Each question requires an answer.</p>
-      <QuizForm id="quiz" onSubmit={handleSubmit}>
+      <QuizForm id='quiz' onSubmit={handleSubmit}>
         <QuizQuestions>
           {quiz.Questions.map((q) => (
-            <li key={q.id} className="quizQuestion">
+            <li key={q.id} className='quizQuestion'>
               <h2>{q.questionText}</h2>
               <p>Choose One</p>
               <QuizChoices>
                 {q.Choices.map((c) => (
                   <li key={c.id} id={c.id}>
                     <div>
-                      <input type="radio" name={"question_" + q.id} required />
+                      <input type='radio' name={'question_' + q.id} required />
                       <label>{c.choiceText}</label>
                     </div>
                   </li>
@@ -124,7 +124,7 @@ const Quiz = () => {
         </QuizQuestions>
 
         <SubmitBtnDiv>
-          <Btn label="Submit" />
+          <Btn label='Submit' />
         </SubmitBtnDiv>
       </QuizForm>
     </Container>
