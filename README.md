@@ -2,7 +2,7 @@
 
 Quiz App is a web application that offers users custom created quizzes to take.
 
-[Live Demo](https://quiz-app-eta.herokuapp.com/)
+[Live Demo](https://quiz-app-tjc.herokuapp.com/)
 
 ## Features:
 

@@ -38,10 +38,8 @@ router.get('/callback', async (req, res) => {
       // } else {
       //add the access_token to the database
       await LoginToken.create({ token: access_token });
-      console.log(access_token);
-      const refferer = req.headers.referer;
       //redirect to the frontend home page
-      res.redirect(`${refferer}?token=${access_token}`);
+      res.redirect(`https://quiz-app-tjc.herokuapp.com/?token=${access_token}`);
       // }
     }
   );
