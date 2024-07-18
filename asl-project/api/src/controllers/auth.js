@@ -28,6 +28,7 @@ router.get('/callback', async (req, res) => {
     async (err, response, body) => {
       // parse the body of the response for the access_token
       const { access_token } = JSON.parse(body);
+      console.log(access_token);
 
       // seperate the routes for the api and the frontend. - API uses session, frontend adds token into db.
       // prevents the user from logging in to both the api and the frontend at the same time.
