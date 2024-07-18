@@ -3,6 +3,8 @@ const express = require('express'),
   request = require('request'),
   { LoginToken } = require('../models/index');
 
+require('dotenv').config();
+
 // GET login
 router.get('/login', (req, res) => {
   res.render('auth/login');
@@ -15,8 +17,8 @@ router.get('/callback', async (req, res) => {
     {
       uri: 'https://github.com/login/oauth/access_token',
       qs: {
-        client_id: 'e3ebfea3a5e32f5169e1',
-        client_secret: '82da6bf8f2b22f939add1d1c9418072a6c2b33b6',
+        client_id: process.env.GIT_CLIENT_ID,
+        client_secret: process.env.GIT_CLIENT_SECRET,
         code,
       },
       headers: {
