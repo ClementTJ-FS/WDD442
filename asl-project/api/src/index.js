@@ -27,9 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Template engine. - Eta
-app.engine('eta', eta.renderFile);
-app.set('view engine', 'eta');
-app.set('views', __dirname + '/src/views');
+// app.engine('eta', eta.renderFile);
+// app.set('view engine', 'eta');
+// app.set('views', __dirname + '/src/views');
 
 //cors
 app.use(
