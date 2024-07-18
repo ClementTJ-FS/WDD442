@@ -41,7 +41,9 @@ router.get('/callback', async (req, res) => {
       //add the access_token to the database
       await LoginToken.create({ token: access_token });
       //redirect to the frontend home page
-      res.redirect(`https://quiz-app-tjc.herokuapp.com/?token=${access_token}`);
+      res.redirect(
+        `https://wdd442-production.up.railway.app/?token=${access_token}`
+      );
       // }
     }
   );
